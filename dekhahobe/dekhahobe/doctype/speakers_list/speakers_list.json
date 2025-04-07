@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-05 18:19:34.770559",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "speaker_name",
+  "short_bio",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "speaker_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Speaker Name",
+   "options": "Speakers"
+  },
+  {
+   "fetch_from": "speaker_name.short_bio",
+   "fieldname": "short_bio",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Short Bio"
+  },
+  {
+   "fetch_from": "speaker_name.image",
+   "fieldname": "image",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Image"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-04-05 18:22:53.997728",
+ "modified_by": "Administrator",
+ "module": "Dekhahobe",
+ "name": "Speakers List",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

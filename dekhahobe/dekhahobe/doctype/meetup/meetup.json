@@ -1,0 +1,284 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-05 16:27:28.899687",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_csus",
+  "title",
+  "start_date",
+  "end_date",
+  "column_break_oazi",
+  "event_type",
+  "location",
+  "venue",
+  "google_map_link",
+  "meeting_link",
+  "column_break_bzfi",
+  "organized_by",
+  "contact_person",
+  "contact_no",
+  "section_break_zcnr",
+  "event_description",
+  "section_break_swfm",
+  "event_category",
+  "status",
+  "ticket",
+  "column_break_odqu",
+  "has_speaker_list",
+  "has_schedule",
+  "show_map",
+  "show_faq",
+  "show_contact_form",
+  "column_break_mbog",
+  "is_private_events",
+  "event_cover_image",
+  "column_break_ogqv",
+  "section_break_xcak",
+  "ticket_information",
+  "speakers_information_section",
+  "table_yfpj",
+  "section_break_owlh",
+  "schedule_information",
+  "section_break_pcsd",
+  "faqs",
+  "section_break_8yzq",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_8yzq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Meetup",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "event_category",
+   "fieldtype": "Data",
+   "label": "Event Category"
+  },
+  {
+   "fieldname": "column_break_odqu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPublished\nPostponed\nCancel\nExpired"
+  },
+  {
+   "fieldname": "column_break_mbog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_private_events",
+   "fieldtype": "Check",
+   "label": "Is Private Events"
+  },
+  {
+   "fieldname": "section_break_csus",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Datetime",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Datetime",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "column_break_oazi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "venue",
+   "fieldtype": "Data",
+   "label": "Venue"
+  },
+  {
+   "fieldname": "google_map_link",
+   "fieldtype": "Data",
+   "label": "Google Map Link"
+  },
+  {
+   "fieldname": "column_break_bzfi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "organized_by",
+   "fieldtype": "Data",
+   "label": "Organized By"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_no",
+   "fieldtype": "Data",
+   "label": "Contact No"
+  },
+  {
+   "fieldname": "section_break_zcnr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "event_description",
+   "fieldtype": "Text Editor",
+   "label": "Event Description"
+  },
+  {
+   "fieldname": "column_break_ogqv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "meeting_link",
+   "fieldtype": "Small Text",
+   "label": "Meeting Link"
+  },
+  {
+   "fieldname": "ticket",
+   "fieldtype": "Select",
+   "label": "Ticket",
+   "options": "Free\nPaid"
+  },
+  {
+   "fieldname": "section_break_swfm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Select",
+   "label": "Event Type",
+   "options": "Physical\nVirtual"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_speaker_list",
+   "fieldtype": "Check",
+   "label": "Has Speaker List"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_schedule",
+   "fieldtype": "Check",
+   "label": "Has Schedule"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_map",
+   "fieldtype": "Check",
+   "label": "Show Map"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_faq",
+   "fieldtype": "Check",
+   "label": "Show FAQ"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_contact_form",
+   "fieldtype": "Check",
+   "label": "Show Contact Form"
+  },
+  {
+   "fieldname": "event_cover_image",
+   "fieldtype": "Attach Image",
+   "label": "Event Cover Image"
+  },
+  {
+   "fieldname": "section_break_xcak",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ticket_information",
+   "fieldtype": "Table",
+   "label": "Ticket Information",
+   "options": "Ticket Information"
+  },
+  {
+   "fieldname": "section_break_owlh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "schedule_information",
+   "fieldtype": "Table",
+   "label": "Schedule Information",
+   "options": "Schedule"
+  },
+  {
+   "fieldname": "section_break_pcsd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "faqs",
+   "fieldtype": "Table",
+   "label": "FAQs",
+   "options": "FAQs"
+  },
+  {
+   "fieldname": "speakers_information_section",
+   "fieldtype": "Section Break",
+   "label": "Speakers Information"
+  },
+  {
+   "fieldname": "table_yfpj",
+   "fieldtype": "Table",
+   "options": "Speakers List"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-04-05 18:24:25.741486",
+ "modified_by": "Administrator",
+ "module": "Dekhahobe",
+ "name": "Meetup",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
