@@ -9,8 +9,11 @@
   "date",
   "start_time",
   "end_time",
-  "topics",
-  "speaker"
+  "title",
+  "description",
+  "speaker",
+  "image",
+  "industry"
  ],
  "fields": [
   {
@@ -33,24 +36,43 @@
    "label": "End Time"
   },
   {
-   "fieldname": "topics",
-   "fieldtype": "Small Text",
-   "in_list_view": 1,
-   "label": "Topics"
-  },
-  {
    "fieldname": "speaker",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Speaker"
+   "label": "Speaker",
+   "options": "Speakers"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title"
+  },
+  {
+   "fetch_from": "speaker.image",
+   "fieldname": "image",
+   "fieldtype": "Data",
+   "label": "Image"
+  },
+  {
+   "fetch_from": "speaker.industry",
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-04-05 18:02:36.165577",
+ "modified": "2025-04-16 15:36:22.683167",
  "modified_by": "Administrator",
  "module": "Dekhahobe",
  "name": "Schedule",

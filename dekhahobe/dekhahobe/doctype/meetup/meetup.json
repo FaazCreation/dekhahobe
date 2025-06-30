@@ -1,7 +1,7 @@
 {
-
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:title",
  "creation": "2025-04-05 16:27:28.899687",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -20,8 +20,13 @@
   "organized_by",
   "contact_person",
   "contact_no",
+  "published",
+  "route",
+  "youtube_video_link",
   "section_break_zcnr",
   "event_description",
+  "section_break_ifnm",
+  "event_tag",
   "section_break_swfm",
   "event_category",
   "status",
@@ -38,13 +43,14 @@
   "column_break_ogqv",
   "section_break_xcak",
   "ticket_information",
-  "speakers_information_section",
-  "table_yfpj",
+  "section_break_dsog",
+  "speakers_information",
   "section_break_owlh",
   "schedule_information",
   "section_break_pcsd",
   "faqs",
   "section_break_8yzq",
+  "title_sponsors",
   "amended_from"
  ],
  "fields": [
@@ -64,8 +70,9 @@
   },
   {
    "fieldname": "event_category",
-   "fieldtype": "Data",
-   "label": "Event Category"
+   "fieldtype": "Select",
+   "label": "Event Category",
+   "options": "Weddings\nBirthdays\nReunions\nPrivate parties\nConferences\nMeetings\nProduct launches\nNetworking\nWorkshops\nWebinars\nSeminars\nTraining sessions\nConcerts\nFestivals\nArt shows\nTheater\nTournaments\nMarathons\nEsports\nFundraisers\nAwareness events\nDonation drives\nOnline conferences\nLive streams\nHybrid launches"
   },
   {
    "fieldname": "column_break_odqu",
@@ -94,7 +101,8 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "label": "Title",
+   "unique": 1
   },
   {
    "fieldname": "start_date",
@@ -218,6 +226,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "has_speaker_list",
    "fieldname": "ticket_information",
    "fieldtype": "Table",
    "label": "Ticket Information",
@@ -244,24 +253,59 @@
    "options": "FAQs"
   },
   {
-   "fieldname": "speakers_information_section",
-   "fieldtype": "Section Break",
-   "label": "Speakers Information"
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
   },
   {
-   "fieldname": "table_yfpj",
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "youtube_video_link",
+   "fieldtype": "Data",
+   "label": "Youtube Video Link"
+  },
+  {
+   "fieldname": "section_break_dsog",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "speakers_information",
    "fieldtype": "Table",
+   "label": "Speakers Information",
    "options": "Speakers List"
+  },
+  {
+   "fieldname": "title_sponsors",
+   "fieldtype": "Table",
+   "label": "Title Sponsors",
+   "options": "Title Sponsors"
+  },
+  {
+   "fieldname": "section_break_ifnm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "event_tag",
+   "fieldtype": "Table",
+   "label": "Event Tag",
+   "options": "Event Tag Link"
   }
  ],
  "grid_page_length": 50,
+ "has_web_view": 1,
  "index_web_pages_for_search": 1,
+ "is_published_field": "published",
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-05 18:24:25.741486",
+ "modified": "2025-04-20 10:57:33.183855",
  "modified_by": "Administrator",
  "module": "Dekhahobe",
  "name": "Meetup",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -278,6 +322,7 @@
    "write": 1
   }
  ],
+ "route": "route",
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",

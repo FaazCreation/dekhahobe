@@ -1,0 +1,684 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+  </style>
+
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<section class="header-top mb-5" style="background-color: #f9f9f9; padding: 20px 0;">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <!-- Left Column: Title and Details -->
+      <div class="col-md-9 mb-3 mb-md-0">
+        <h1 class="h1 font-weight-bold m-0">{{ _(doc.title or '') }}</h1>
+        <p class="mt-2">
+          <span class="mr-3">
+            <i class="far fa-calendar-alt" style="color: #ed7a42; margin-right: 7px;"></i>{{
+            frappe.utils.get_datetime(doc.start_date).strftime("%B %d, %Y at %I:%M %p") }}
+          </span>
+          <span class="mr-3">
+            <i class="fas fa-tag" style="color: #ed7a42;"></i> {{ _(doc.event_category or '') }}
+          </span>
+          <span class="mr-3">
+            <i class="fas fa-map-marker-alt" style="color: #ed7a42;"></i> {{ doc.location or
+            (frappe.format_date(doc.return_date)) }}
+          </span>
+        </p>
+      </div>
+
+      <!-- Right Column: Social Links -->
+      <div class="col-md-3 text-center text-md-right">
+        <a href="https://www.facebook.com/muballigtravels" target="_blank" class="text-primary h2 mr-3">
+          <i class="fab fa-facebook" style="color: #336aea;"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send/?phone=1711517887&text&type=phone_number&app_absent=0" target="_blank"
+          class="text-success h2"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="header-img">
+  <div class="container">
+    <div class="py-5">
+      <div class="row">
+        <div class="col-md-9">
+          <img class="img-fluid rounded w-100 responsive-img" src="{{ doc.event_cover_image }}"
+            alt="{{ doc.title or '' }}">
+        </div>
+        <div class="col-md-3 border rounded-lg">
+
+          <div class="d-flex align-items-start my-3">
+            <div class="mr-3">
+              <img style="width: 55px;" src="/files/map_18561782.png" alt="">
+            </div>
+            <div style="border-bottom: 1px solid #333;">
+              <p class="font-weight-bold mb-0" style="margin-top: 16px;">{{ _(doc.location or '') }}</p>
+              <a href="{{ _(doc.google_map_link) }}" target="_blank" class="font-weight-bold mb-0"
+                style="font-size: 12px; text-decoration: none;">{{ _("Check in Google Map") }}</a>
+            </div>
+          </div>
+
+          <div class="fai"
+            style="background: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); max-width: 400px;">
+
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+              <i class="fas fa-calendar-alt" style="font-size: 20px; color: #007bff;"></i>
+              <div>
+                <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">Start
+                  Date</p>
+                <p style="margin: 2px 0 0; font-weight: 500; color: #333;">{{
+                  frappe.utils.formatdate(doc.get_formatted('start_date'), "dd-MM-yyyy") }}</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+              <i class="fas fa-calendar-check" style="font-size: 20px; color: #28a745;"></i>
+              <div>
+                <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">End
+                  Date</p>
+                <p style="margin: 2px 0 0; font-weight: 500; color: #333;">{{
+                  frappe.utils.formatdate(doc.get_formatted('end_date'), "dd-MM-yyyy") }}</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
+              <i class="fas fa-user-tie" style="font-size: 20px; color: #17a2b8;"></i>
+              <div>
+                <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">
+                  Organiser</p>
+                <p style="margin: 2px 0 0; font-weight: 500; color: #333;">{{ doc.organized_by }}</p>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- <h6>{{ _("Event Tags") }}</h6>
+          <div class="hover-card-container d-inline-block mb-2" style="position: relative;">
+            <a class="btn border d-inline-block"
+              style="background-color: #2082FF; color: #fff; padding: 5px 10px; margin-right: 5px;"
+              onclick="showHoverCard(this)" onmouseout="hideHoverCard(this)">
+              {{ _(doc.event_category) }}
+            </a>
+          </div> -->
+
+          <h6>{{ _("Event Tags") }}</h6>
+          {% if doc.event_tag %}
+          {% for row in doc.event_tag %}
+          <div class="hover-card-container d-inline-block mb-2" style="position: relative;">
+            <a class="btn border d-inline-block"
+              style="background-color: #2082FF; color: #fff; padding: 5px 10px; margin-right: 5px;"
+              onclick="showHoverCard(this)" onmouseout="hideHoverCard(this)">
+              {{ _(row.event_tag) }}
+            </a>
+          </div>
+          {% endfor %}
+          {% else %}
+          <p>No tags available.</p>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="description-video">
+  <div class="container">
+    <div class="pilgrim py-5">
+      <div class="row">
+        <!-- Left Column: Text Content -->
+        <div class="col-md-7 py-4" style="margin-bottom: 60px;">
+          <h3 class="text-dark font-weight-bold m-0 mb-4" style="font-size: 25px;">{{ _("Event Details") }}</h3>
+          <div class="text-muted" style="font-size: 18px;">{{ _(doc.event_description or '' ) }}</div>
+        </div>
+
+        <!-- Right Column: Video Embed -->
+        {% if doc.youtube_video_link %}
+        <div class="col-md-5 py-4">
+          <iframe class="w-100" height="270" src="{{ doc.youtube_video_link }}" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Event Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .label-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .nav-link.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    /* Remove hover shadow for Schedule and FAQ accordion buttons */
+    .accordion-button:hover,
+    .accordion-button:focus {
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    /* Optional: If cards inside the accordion also have hover styles */
+    .accordion-item:hover,
+    .card:hover {
+      box-shadow: none !important;
+    }
+
+    .card.shadow-sm:hover {
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+
+<body style="margin-bottom: 120px !important;">
+
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Main content with nav labels and dynamic sections -->
+      <div class="col-md-8">
+        <!-- Label navigation -->
+        <div class="label-nav mb-3">
+          {% if doc.has_speaker_list %}
+          <div class="nav-link active" data-target="speakers">Speakers</div>
+          {% endif %}
+          {% if doc.has_schedule %}
+          <div class="nav-link" data-target="schedule">Schedule</div>
+          {% endif %}
+          <div class="nav-link" data-target="tickets">Tickets</div>
+          <div class="nav-link" data-target="map">Map</div>
+          {% if doc.show_faq %}
+          <div class="nav-link" data-target="faq">FAQ</div>
+          {% endif %}
+        </div>
+
+        <!-- Sections -->
+        {% if doc.has_speaker_list %}
+        {% set speakers = frappe.get_all('Speakers List', fields='*') %}
+        <div id="speakers" class="content-section active">
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              {% for speaker in speakers %}
+              <!-- Speaker 1 -->
+              <div class="col-md-4">
+                <div class="card text-white bg-dark">
+                  <img src="{{ speaker.image }}" class="card-img-top"
+                    style="width: 100%; height: auto; background-repeat: no-repeat; background-size: cover;"
+                    alt="{{ speaker.speaker_name }}">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 18px !important;">{{ speaker.speaker_name }}</h5>
+                    <p class="card-text" style="font-size: 15px !important;">{{ speaker.industry }}</p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if doc.has_schedule %}
+        <div id="schedule" class="content-section">
+          <div class="card p-4 mb-4">
+            <h2>Event Schedule</h2>
+
+            <div class="accordion" id="scheduleAccordion">
+              {% for session in doc.schedule_information %}
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ loop.index }}">
+                  <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                    {{ frappe.utils.formatdate(session.get_formatted('date'), "MMM dd yyyy") }} - {{ session.start_time
+                    }} - {{ session.title }}
+                  </button>
+                </h2>
+                <div id="collapse{{ loop.index }}"
+                  class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                  data-bs-parent="#scheduleAccordion">
+                  <div class="accordion-body">
+                    <p>{{ session.description }}</p>
+
+                    {% if session.speaker %}
+                    <div class="d-flex align-items-center justify-content-between mt-4" style="margin-right: 8.5rem;">
+                      <!-- Left side: Centered "Speakers" title -->
+                      <div class="me-4 d-flex align-items-center" style="min-width: 120px;">
+                        <h5 class="fw-bold mb-0">Speakers</h5>
+                      </div>
+
+                      <!-- Right side: Compact horizontal speaker boxes -->
+                      <div class="d-flex gap-3 flex-wrap">
+                        <div class="d-flex align-items-center p-2 bg-dark text-white rounded shadow-sm"
+                          style="min-width: 200px;">
+                          <img src="{{ session.image }}" alt="{{ session.speaker }}" class="rounded-circle me-2"
+                            style="width: 60px; height: 60px; object-fit: cover;">
+                          <div>
+                            <h6 class="mb-1" style="font-size: 14px;">{{ session.speaker }}</h6>
+                            <p class="mb-0 text-white" style="font-size: 12px;">{{ session.industry }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Event Tickets</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+          <style>
+            .ticket-quantity {
+              align-items: center;
+              justify-content: center;
+              display: flex;
+              gap: 10px;
+            }
+
+            .quantity-btn {
+              width: 40px;
+              height: 40px;
+              font-size: 18px;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .quantity-btn:focus {
+              outline: none;
+            }
+
+            .card-body {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              height: 100%;
+            }
+
+            .btn-primary,
+            .btn-success {
+              margin-top: auto;
+            }
+          </style>
+        </head>
+
+        <body>
+
+          <div id="tickets" class="content-section container py-5">
+            <div class="card p-4 mb-4">
+              <h2 style="color: #FF6B6B;">Event Tickets</h2>
+              <div class="row g-4">
+
+                {% for ticket in doc.ticket_information %}
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title text-center">
+                        {{ ticket.ticket_title or '' }}
+                      </h5>
+                      <h3 class="text-center text-primary">${{ ticket.price }}</h3>
+
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>{{ ticket.instruction }}</li>
+                      </ul>
+
+                      <!-- Quantity Counter -->
+                      <label for="{{ ticket.name }}Quantity" class="form-label mt-auto">Select Quantity</label>
+                      <div class="ticket-quantity d-flex justify-content-center mb-3">
+                        <button class="btn btn-outline-primary quantity-btn"
+                          onclick="changeQuantity('{{ ticket.name }}Quantity', -1)">−</button>
+                        <input type="number" id="{{ ticket.name }}Quantity" class="form-control mx-2 text-center"
+                          value="1" min="1" style="width: 60px;" />
+                        <button class="btn btn-outline-primary quantity-btn"
+                          onclick="changeQuantity('{{ ticket.name }}Quantity', 1)">+</button>
+                      </div>
+
+                      <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                        data-ticket-type="{{ ticket.ticket_type | lower }}"
+                        data-ticket-title="{{ ticket.ticket_title }}" data-ticket-price="{{ ticket.price }}"
+                        data-ticket-input="{{ ticket.name }}Quantity" onclick="showTotal(this)">
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true"
+            data-bs-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ticketModalLabel">Ticket Summary</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><strong>Ticket Type:</strong> <span id="modalTicketType"></span></p>
+                  <p><strong>Quantity:</strong> <span id="modalTicketQty"></span></p>
+                  <p><strong>Total Cost:</strong> <span id="modalTicketCost"></span></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-success">Proceed to Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bootstrap JS and your script -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+          <script>
+            function changeQuantity(inputId, delta) {
+              const input = document.getElementById(inputId);
+              let value = parseInt(input.value) + delta;
+              if (value < 1) value = 1;
+              input.value = value;
+            }
+
+            function showTotal(button) {
+              const type = button.getAttribute('data-ticket-type');
+              const title = button.getAttribute('data-ticket-title');
+              const price = parseFloat(button.getAttribute('data-ticket-price'));
+              const inputId = button.getAttribute('data-ticket-input');
+              const quantity = parseInt(document.getElementById(inputId).value) || 1;
+              const cost = price * quantity;
+
+              // Update modal content
+              document.getElementById('modalTicketType').textContent = title || (type.charAt(0).toUpperCase() + type.slice(1));
+              document.getElementById('modalTicketQty').textContent = quantity;
+              document.getElementById('modalTicketCost').textContent = `$${cost.toFixed(2)}`;
+
+              // Show the modal
+              const ticketModal = new bootstrap.Modal(document.getElementById('ticketModal'));
+              ticketModal.show();
+            }
+          </script>
+
+        </body>
+
+        </html>
+
+        <div id="map" class="content-section">
+          <div class="card p-4 mb-4">
+            <h2>Venue Map</h2>
+            <p>Find us at our event location below:</p>
+
+            <!-- Google Maps Embed -->
+            <div class="ratio ratio-16x9">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019262783303!2d-122.41941518468167!3d37.77492927975962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c0fbc7e2b%3A0x70e4b6325f9bb84a!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1618321234567"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
+
+
+        {% if doc.show_faq %}
+        <div id="faq" class="content-section">
+          <div class="card p-4 mb-4">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="accordion" id="faqAccordion">
+              {% for faq in doc.faqs %}
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading{{ loop.index }}">
+                  <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ loop.index }}"
+                    aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div id="faqCollapse{{ loop.index }}"
+                  class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    {{ faq.answer }}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+
+
+      </div>
+
+
+
+      <!-- Sidebar -->
+      <div class="col-md-4">
+        <div class="card p-3 mb-4">
+          <h6>Contact</h6>
+          <p>Email: <a href="mailto:event@demo.com">event@demo.com</a></p>
+          <p>Phone: 0123 506 483</p>
+          {% for ticket in doc.ticket_information %}
+          <p>Remaining Tickets: {{ ticket.quantity }}</p>
+          {% endfor %}
+          <button id="addToCalendarBtn" class="btn btn-warning w-100">Add to Calendar</button>
+        </div>
+
+        <div class="card p-3 mb-4">
+          <h6>Sponsors</h6>
+          <div class="row g-2">
+            {% for sponsor in doc.title_sponsors %}
+            <div class="col-4">
+              <img src="{{ sponsor.sponsors_image }}" class="img-fluid" alt="{{ sponsor.sponsor_name }}">
+              <p class="text-center" style="font-size: 14px !important;">{{ sponsor.sponsors_label }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+
+        <div class="card p-3">
+          <h6>Sponsored Ads</h6>
+          <div class="mb-3">
+            <a href="https://example.com/ad1" target="_blank">
+              <img src="/files/_841dc0ce-6288-4df3-b684-96046e91ee7a.jpeg" alt="Ad 1" class="img-fluid rounded mb-2">
+            </a>
+            <p class="text-muted small">Discover exclusive travel deals with Muballig Travels!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    document.getElementById("addToCalendarBtn").addEventListener("click", function () {
+      const title = encodeURIComponent("My Awesome Event");
+      const details = encodeURIComponent("Join us for an awesome event!");
+      const location = encodeURIComponent("123 Main St, New York, NY");
+      const start = "20250420T180000Z";
+      const end = "20250420T200000Z";
+
+      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+      window.open(url, "_blank");
+    });
+  </script>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const tabs = document.querySelectorAll('.label-nav .nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const target = tab.dataset.target;
+
+        sections.forEach(sec => {
+          sec.classList.toggle('active', sec.id === target);
+        });
+      });
+    });
+  </script>
+
+  <script>
+    function changeQuantity(inputId, delta) {
+      const input = document.getElementById(inputId);
+      let value = parseInt(input.value, 10) || 1;
+      value += delta;
+      if (value < 1) value = 1; // Prevent negative or zero
+      input.value = value;
+    }
+  </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+<style>
+  .fai i {
+    font-size: 24px;
+  }
+
+  p {
+    line-height: 1.4;
+  }
+
+  .label-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .nav-link {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .nav-link.active {
+    background-color: #D01183;
+    color: white;
+  }
+
+  .content-section {
+    display: none;
+  }
+
+  .content-section.active {
+    display: block;
+  }
+
+  .accordion-button:hover,
+  .accordion-button:focus,
+  .accordion-item:hover,
+  .card:hover,
+  .card.shadow-sm:hover {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .responsive-img {
+    height: 15rem;
+  }
+
+  @media (min-width: 768px) {
+    .responsive-img {
+      height: 35rem;
+    }
+  }
+</style>
+
+
+<!-- Facility section onclick card show js -->
+<script>
+  function showHoverCard(element) {
+    const hoverCard = element.nextElementSibling;
+    hoverCard.style.display = 'block';
+  }
+
+  function hideHoverCard(element) {
+    const hoverCard = element.nextElementSibling;
+    hoverCard.style.display = 'none';
+  }
+</script>
+
+{% endblock %}
