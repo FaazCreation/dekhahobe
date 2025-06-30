@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-16 13:21:37.724430",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sponsors_label",
+  "sponsors_image"
+ ],
+ "fields": [
+  {
+   "fieldname": "sponsors_label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sponsors Label"
+  },
+  {
+   "fieldname": "sponsors_image",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Sponsors Image"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-04-16 13:23:52.690877",
+ "modified_by": "Administrator",
+ "module": "Dekhahobe",
+ "name": "Title Sponsors",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
