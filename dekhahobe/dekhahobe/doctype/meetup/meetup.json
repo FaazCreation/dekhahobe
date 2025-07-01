@@ -226,7 +226,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "depends_on": "has_speaker_list",
    "fieldname": "ticket_information",
    "fieldtype": "Table",
    "label": "Ticket Information",
@@ -237,6 +236,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "has_schedule",
    "fieldname": "schedule_information",
    "fieldtype": "Table",
    "label": "Schedule Information",
@@ -247,6 +247,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "show_faq",
    "fieldname": "faqs",
    "fieldtype": "Table",
    "label": "FAQs",
@@ -273,6 +274,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "has_speaker_list",
    "fieldname": "speakers_information",
    "fieldtype": "Table",
    "label": "Speakers Information",
@@ -301,7 +303,7 @@
  "is_published_field": "published",
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-20 10:57:33.183855",
+ "modified": "2025-07-01 15:30:36.217055",
  "modified_by": "Administrator",
  "module": "Dekhahobe",
  "name": "Meetup",
