@@ -16,14 +16,32 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .event-grid {
+        /* .event-grid {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
+        } */
+
+        .event-grid {
+            display: flex;
+            flex-wrap: wrap; 
             gap: 20px;
         }
 
         .event-item {
-            flex: 1;
+            flex: 1 1 100%; 
+        }
+
+
+        @media (min-width: 768px) {
+            .event-item {
+                flex: 1 1 calc(33.333% - 20px); 
+            }
+        }
+
+
+        .event-item {
+            /* flex: 1; */
             border: 1px solid #ddd;
             padding: 15px;
             border-radius: 8px;
@@ -158,7 +176,7 @@
             <div class="col-12">
                 <div id="all-events">
                     <div class="event-grid">
-                        {% for event in events[:3] %}  <!-- Limit to the first 4 events -->
+                        {% for event in events[:3] %}
                         <div class="event-item">
                             <div class="position-relative">
                                 <img src="{{ event.event_cover_image }}" alt="Event Image">
@@ -168,10 +186,9 @@
                             <div class="event-title"><a href="{{ event.route }}">{{ event.title }}</a></div>
                             <div class="event-details">
                                 <span><i class="fas fa-tag"></i> {{ event.event_category }}</span>
-                                <span><i class="fas fa-calendar-alt"></i> {{ event.start_date }}</span>
+                                <span><i class="fas fa-calendar-alt"></i> {{ frappe.utils.formatdate(event.start_date) }}</span>
                                 <span><i class="fas fa-map-marker-alt"></i> {{ event.location }}</span>
                             </div>
-
                         </div>
                         {% endfor %}
                     </div>

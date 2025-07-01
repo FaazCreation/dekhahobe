@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-30 22:07:09.188529",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_vxof",
+  "group",
+  "from_date",
+  "to_date",
+  "active_status",
+  "column_break_idtq",
+  "full_name",
+  "designation",
+  "photo",
+  "section_break_bgot",
+  "bio"
+ ],
+ "fields": [
+  {
+   "fieldname": "group",
+   "fieldtype": "Link",
+   "label": "Group",
+   "options": "Group"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date\t"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "bio",
+   "fieldtype": "Small Text",
+   "label": "Bio"
+  },
+  {
+   "fieldname": "section_break_vxof",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_idtq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_bgot",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "active_status",
+   "fieldtype": "Check",
+   "label": "Active Status"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-30 22:12:58.087971",
+ "modified_by": "Administrator",
+ "module": "Dekhahobe",
+ "name": "Group Committee Member",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
