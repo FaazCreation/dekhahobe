@@ -67,10 +67,10 @@
             <div class="mr-3">
               <img style="width: 55px;" src="/files/map_18561782.png" alt="">
             </div>
-            <div style="border-bottom: 1px solid #333;">
+            <div style="border-bottom: 1px solid #f58900;">
               <p class="font-weight-bold mb-0" style="margin-top: 16px;">{{ _(doc.location or '') }}</p>
               <a href="{{ _(doc.google_map_link) }}" target="_blank" class="font-weight-bold mb-0"
-                style="font-size: 12px; text-decoration: none;">{{ _("Check in Google Map") }}</a>
+                style="font-size: 12px; text-decoration: none; color: #333;">{{ _("Check in Google Map") }}</a>
             </div>
           </div>
 
@@ -78,7 +78,7 @@
             style="background: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); max-width: 400px;">
 
             <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-              <i class="fas fa-calendar-alt" style="font-size: 20px; color: #007bff;"></i>
+              <i class="fas fa-calendar-alt" style="font-size: 20px; color: #f58900;"></i>
               <div>
                 <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">Start Date</p>
                 <p style="margin: 2px 0 0; font-weight: 500; color: #333;">{{ frappe.utils.formatdate(doc.start_date) }}</p>
@@ -86,7 +86,7 @@
             </div>
 
             <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-              <i class="fas fa-calendar-check" style="font-size: 20px; color: #28a745;"></i>
+              <i class="fas fa-calendar-check" style="font-size: 20px; color: #f58900;"></i>
               <div>
                 <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">End
                   Date</p>
@@ -95,7 +95,7 @@
             </div>
 
             <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-              <i class="fas fa-user-tie" style="font-size: 20px; color: #17a2b8;"></i>
+              <i class="fas fa-user-tie" style="font-size: 20px; color: #f58900;"></i>
               <div>
                 <p style="margin: 0; text-transform: uppercase; font-weight: 600; font-size: 12px; color: #666;">
                   Organiser</p>
@@ -183,12 +183,21 @@
     .nav-link {
       padding: 8px 16px;
       cursor: pointer;
+    }
+    
+    .nav-item .nav-link {
+      padding: 8px 16px;
+      cursor: pointer;
+      border: none;
+    }
+    .label-nav .nav-link {
+      padding: 8px 16px;
+      cursor: pointer;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
     .nav-link.active {
-      background-color: #0d6efd;
+      background-color: #f58900;
       color: white;
     }
 
@@ -368,7 +377,7 @@
 
           <div id="tickets" class="content-section container py-5">
             <div class="card p-4 mb-4">
-              <h2 style="color: #FF6B6B;">Event Tickets</h2>
+              <h2 style="color: #f58900;">Event Tickets</h2>
               <div class="row g-4">
 
                 {% for ticket in doc.ticket_information %}
@@ -519,12 +528,12 @@
       <div class="col-md-4">
         <div class="card p-3 mb-4">
           <h6>Contact</h6>
-          <p>Email: <a href="mailto:event@demo.com">event@demo.com</a></p>
+          <p>Email: <a href="mailto:event@demo.com" style="color: #f58900;">event@demo.com</a></p>
           <p>Phone: 0123 506 483</p>
           {% for ticket in doc.ticket_information %}
           <p>Remaining Tickets: {{ ticket.quantity }}</p>
           {% endfor %}
-          <button id="addToCalendarBtn" class="btn btn-warning w-100">Add to Calendar</button>
+          <button id="addToCalendarBtn" class="btn w-100" style="background-color: #f58900; color: white;">Add to Calendar</button>
         </div>
 
         <div class="card p-3 mb-4">
@@ -632,7 +641,7 @@
   }
 
   .nav-link.active {
-    background-color: #D01183;
+    background-color: #f58900;
     color: white;
   }
 

@@ -1,0 +1,62 @@
+<!-- templates/pages/group_page.html -->
+
+<div class="container-fluid mt-4">
+  <div class="row">
+
+    <!-- Sidebar Tabs -->
+    <div class="col-md-3">
+      <div class="list-group" id="tab-list" role="tablist">
+        <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#about" role="tab">About / Info</a>
+        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#committee" role="tab">Committee</a>
+        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#events" role="tab">Events</a>
+        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#blog" role="tab">Blog / News</a>
+        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#members" role="tab">Members</a>
+        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#media" role="tab">Media Gallery</a>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="col-md-9">
+      <!-- Group Header -->
+      <div class="text-center mb-4">
+        <img src="{{ group.logo }}" alt="Group Logo" class="img-fluid" style="max-height: 120px;">
+        <h2 class="mt-2">{{ group.name }}</h2>
+        <hr>
+      </div>
+
+      <!-- Tab Sections -->
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="about" role="tabpanel">
+          <h3>About / Info</h3>
+          <p>{{ group.about }}</p>
+        </div>
+
+        <div class="tab-pane fade" id="committee" role="tabpanel">
+          <h3>Committee</h3>
+          {{ group.committee_html or "<p>No committee info available.</p>" }}
+        </div>
+
+        <div class="tab-pane fade" id="events" role="tabpanel">
+          <h3>Events</h3>
+          {{ group.events_html or "<p>No events listed.</p>" }}
+        </div>
+
+        <div class="tab-pane fade" id="blog" role="tabpanel">
+          <h3>Blog / News</h3>
+          {{ group.blog_html or "<p>No blog posts yet.</p>" }}
+        </div>
+
+        <div class="tab-pane fade" id="members" role="tabpanel">
+          <h3>Members</h3>
+          {{ group.members_html or "<p>Member list coming soon.</p>" }}
+        </div>
+
+        <div class="tab-pane fade" id="media" role="tabpanel">
+          <h3>Media Gallery</h3>
+          {{ group.media_html or "<p>No media uploaded.</p>" }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
