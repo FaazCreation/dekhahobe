@@ -10,6 +10,8 @@
   "designation",
   "industry",
   "city",
+  "serial_no",
+  "available",
   "column_break_cuko",
   "short_bio",
   "image"
@@ -52,13 +54,24 @@
    "fieldname": "designation",
    "fieldtype": "Data",
    "label": "Designation"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Int",
+   "label": "Serial No"
+  },
+  {
+   "default": "0",
+   "fieldname": "available",
+   "fieldtype": "Check",
+   "label": "Available"
   }
  ],
  "grid_page_length": 50,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-16 12:05:42.759010",
+ "modified": "2025-07-02 12:07:11.523205",
  "modified_by": "Administrator",
  "module": "Dekhahobe",
  "name": "Speakers",

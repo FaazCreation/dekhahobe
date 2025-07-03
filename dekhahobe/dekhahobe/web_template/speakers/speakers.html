@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bangladesh Speakers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+}
+.speakers-section { padding: 40px 20px; text-align: center; }
+.section-title { font-size: 2.5rem; color: #333; margin-bottom: 30px; }
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+.speaker-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform .3s;
+}
+.speaker-card:hover {
+  transform: translateY(-5px);
+}
+.speaker-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.speaker-card h2 { font-size: 1.2rem; margin: 15px 0 5px; color: #222; }
+.designation { font-size: .95rem; color: #777; margin-bottom: 10px; }
+.bio { font-size: .9rem; color: #555; }
+
+</style>
+
+<body>
+    <!-- {% set speakers = frappe.get_all('Speakers',
+    fields='*') %} -->
+
+    {% set speakers = frappe.get_all('Speakers', fields='*', order_by='serial_no asc') %}
+
+  <section class="speakers-section">
+    <h1 class="section-title">{{ title }}</h1>
+    <div class="speakers-grid">
+
+    {% for speaker in speakers %}
+    {% if speaker.available %}
+      <div class="speaker-card">
+        <img src="{{ speaker.image }}" alt="{{ speaker.speaker_name }}" style="width: 240px; height: 240px; object-fit: cover;">
+        <h2>{{ speaker.speaker_name }}</h2>
+        <p class="designation">{{ speaker.designation }}</p>
+        <p class="bio" style="line-height: 1.3; font-size: 14px;">{{ speaker.short_bio }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</body>
+</html>
